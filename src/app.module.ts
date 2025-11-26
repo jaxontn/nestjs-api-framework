@@ -3,31 +3,33 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { getDatabaseConfig } from './config/database.config';
+import { Merchant } from './entities/merchant.entity';
 import { MerchantsModule } from './modules/merchants/merchants.module';
-import { CustomersModule } from './modules/customers/customers.module';
-import { GamesModule } from './modules/games/games.module';
-import { AnalyticsModule } from './modules/analytics/analytics.module';
-import * as entities from './entities';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [() => require('./config/app.config')()],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        ...getDatabaseConfig(configService),
+        type: 'mysql',
+        host: configService.get<string>('DB_HOST', 'localhost'),
+        port: configService.get<number>('DB_PORT', 3306),
+        username: configService.get<string>('DB_USERNAME', 'root'),
+        password: configService.get<string>('DB_PASSWORD', ''),
+        database: configService.get<string>('DB_DATABASE', 'gamified_crm'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: configService.get<boolean>('DB_SYNCHRONIZE', false),
+        logging: configService.get<boolean>('DB_LOGGING', true),
+        timezone: '+00:00',
+        charset: 'utf8mb4',
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature(Object.values(entities)),
+    TypeOrmModule.forFeature([Merchant]),
     MerchantsModule,
-    CustomersModule,
-    GamesModule,
-    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

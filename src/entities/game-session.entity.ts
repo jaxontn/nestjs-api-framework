@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, JoinColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Customer } from './customer.entity';
 import { QrCampaign } from './qr-campaign.entity';
 import { GamePrize } from './game-prize.entity';
