@@ -10,6 +10,7 @@ import { QrCampaignsModule } from './modules/qr-campaigns/qr-campaigns.module';
 import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { LoyaltyModule } from './modules/loyalty/loyalty.module';
+import { ChallengesModule } from './modules/challenges/challenges.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { LoyaltyModule } from './modules/loyalty/loyalty.module';
     CustomersModule,
     AuthModule,
     LoyaltyModule,
+    ChallengesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
