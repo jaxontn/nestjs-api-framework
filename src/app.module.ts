@@ -11,6 +11,7 @@ import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
 import { LoyaltyModule } from './modules/loyalty/loyalty.module';
 import { ChallengesModule } from './modules/challenges/challenges.module';
+import { MerchantUsersModule } from './modules/merchant-users/merchant-users.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ChallengesModule } from './modules/challenges/challenges.module';
     AuthModule,
     LoyaltyModule,
     ChallengesModule,
+    MerchantUsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

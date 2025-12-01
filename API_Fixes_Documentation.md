@@ -50,6 +50,12 @@ All fixes were applied using the `str_replace_editor` tool, and the final `npm r
   - Renamed the second 'customerStats' to 'leaderboardStats' to avoid redeclaration in the same function scope.
   - Added type assertion `(entry: any)` in the map function to resolve TypeScript inference issues with loosely typed objects.
 
+## Fixes for Merchant-Users Module
+- **Issue**: Invalid @IsUUID arguments and type mismatch in entity assignment.
+- **Fixes**:
+  - Changed @IsUUID('', { each: true }) to @IsUUID(4, { each: true }) for proper UUID version validation.
+  - Updated metadata property type from object to object | null to match nullable column.
+
 ## Additional Fixes for Loyalty Module
 - **Issue**: Syntax errors in `loyalty.service.ts` due to corrupted code structure (extra commas, misplaced brackets, undefined variables).
 - **Fixes**:
@@ -65,6 +71,8 @@ These errors stemmed from:
 - **Lack of Immediate Validation**: Without running builds frequently or using strict linting, syntax errors accumulated.
 - **Variable Redeclaration**: Using the same variable name in the same scope, common in large functions with multiple data aggregations.
 - **Loose Typing**: Overuse of `any` types leads to TypeScript inference issues, especially with array methods like `map` and `Object.values`.
+- **Incorrect Decorator Usage**: Passing invalid arguments to validation decorators without checking documentation.
+- **Type Mismatches**: Entity properties not matching nullable database columns, causing assignment errors.
 
 ## How to Avoid Such Mistakes in Future API Development
 To prevent similar issues:
@@ -78,6 +86,8 @@ To prevent similar issues:
 - **Documentation and Standards**: Maintain coding standards and API docs to ensure consistency across the team.
 - **Proper Variable Naming and Scoping**: Use descriptive, unique names for variables in the same scope; refactor large functions into smaller ones to avoid conflicts.
 - **Strong Typing**: Define interfaces for data structures instead of using `any`; use generics and type assertions judiciously to maintain type safety.
+- **Validate Decorator Usage**: Always check library documentation for correct decorator arguments; use examples from official sources.
+- **Align Entity Types with Database Schema**: Ensure TypeORM entity properties match column definitions, including nullability, to prevent type mismatches.
 
 ## Next Steps: Running the API
 
