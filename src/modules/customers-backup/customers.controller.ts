@@ -28,7 +28,7 @@ import {
   UpdateCustomerSegmentDto,
   CustomerSegment
 } from './dto/customer.dto';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtAuthGuard } from '../customers/jwt-auth.guard';
 
 @ApiTags('Customers')
 @Controller('customers')

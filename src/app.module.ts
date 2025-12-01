@@ -7,6 +7,8 @@ import { Merchant } from './entities/merchant.entity';
 import { MerchantsModule } from './modules/merchants/merchants.module';
 import { GamesModule } from './modules/games/games.module';
 import { QrCampaignsModule } from './modules/qr-campaigns/qr-campaigns.module';
+import { CustomersModule } from './customers/customers.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import { QrCampaignsModule } from './modules/qr-campaigns/qr-campaigns.module';
     MerchantsModule,
     GamesModule,
     QrCampaignsModule,
+    CustomersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

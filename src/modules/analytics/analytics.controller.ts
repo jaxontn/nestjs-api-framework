@@ -22,7 +22,7 @@ import {
   ApiBody
 } from '@nestjs/swagger';
 import { AnalyticsService } from './analytics.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../customers/jwt-auth.guard';
 
 @ApiTags('Analytics')
 @Controller('analytics')

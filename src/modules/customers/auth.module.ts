@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
-import { CustomersController } from './customers.controller';
-import { CustomersService } from './customers.service';
-import { AuthService } from './auth.service';
+import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from '../../entities/customer.entity';
 import { Merchant } from '../../entities/merchant.entity';
 import { GameSession } from '../../entities/game-session.entity';
@@ -14,16 +13,17 @@ import { LoyaltyTransaction } from '../../entities/loyalty-transaction.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Customer, Merchant, GameSession, Leaderboard, LoyaltyTransaction]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'your-secret-key',
       signOptions: {
         expiresIn: parseInt(process.env.JWT_EXPIRES_IN || '0') || 60 * 60 * 24 * 7,
       },
     }),
+    TypeOrmModule.forFeature([Customer, Merchant, GameSession, Leaderboard, LoyaltyTransaction]),
   ],
-  controllers: [CustomersController],
-  providers: [CustomersService, AuthService, JwtStrategy, JwtAuthGuard],
-  exports: [CustomersService, AuthService, JwtAuthGuard]
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
 })
-export class CustomersModule {}
+export class AuthModule {}
