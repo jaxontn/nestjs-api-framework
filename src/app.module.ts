@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Merchant } from './entities/merchant.entity';
 import { MerchantsModule } from './modules/merchants/merchants.module';
+import { GamesModule } from './modules/games/games.module';
+import { QrCampaignsModule } from './modules/qr-campaigns/qr-campaigns.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { MerchantsModule } from './modules/merchants/merchants.module';
     }),
     TypeOrmModule.forFeature([Merchant]),
     MerchantsModule,
+    GamesModule,
+    QrCampaignsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
