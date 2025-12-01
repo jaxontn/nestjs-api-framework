@@ -691,12 +691,12 @@ POST   /api/merchant-users/export               // Export user data
 ### 3.3 Data Export and Reporting
 
 #### **Tasks**:
-- [🔴] Create unified export service for all data types
-- [🔴] Implement multiple export formats (CSV, JSON, PDF)
-- [🔴] Add scheduled report generation
-- [🔴] Create report template system
-- [🔴] Implement email delivery for reports
-- [🔴] Add data filtering and customization options
+- [🟡] Create unified export service for all data types (stubs added, implementation needed)
+- [🟡] Implement multiple export formats (CSV, JSON, PDF) (stubs added, implementation needed)
+- [🟡] Add scheduled report generation (stubs added, implementation needed)
+- [🟡] Create report template system (stubs added, implementation needed)
+- [🟡] Implement email delivery for reports (stubs added, implementation needed)
+- [🟡] Add data filtering and customization options (stubs added, implementation needed)
 
 #### **Required Endpoints** (`/api/reports`):
 ```typescript

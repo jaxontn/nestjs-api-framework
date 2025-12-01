@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoyaltyModule } from './modules/loyalty/loyalty.module';
 import { ChallengesModule } from './modules/challenges/challenges.module';
 import { MerchantUsersModule } from './modules/merchant-users/merchant-users.module';
+import { ReportsModule } from './modules/reports/reports.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { MerchantUsersModule } from './modules/merchant-users/merchant-users.mod
     LoyaltyModule,
     ChallengesModule,
     MerchantUsersModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -56,6 +56,18 @@ All fixes were applied using the `str_replace_editor` tool, and the final `npm r
   - Changed @IsUUID('', { each: true }) to @IsUUID(4, { each: true }) for proper UUID version validation.
   - Updated metadata property type from object to object | null to match nullable column.
 
+## Fixes for Reports Module
+- **Issue**: Property naming mismatches, type issues with nullable relations, and incorrect TypeScript inference.
+- **Fixes**:
+  - Changed database column names (e.g., `merchant_id`) to TypeScript property names (e.g., `merchantId`) in repository create calls.
+  - Used conditional spread syntax `...(reportTemplate ? { reportTemplate } : {})` to avoid assigning null to non-nullable relations.
+  - Added explicit type annotation `const savedReport: Report` to resolve inference issues with `queryRunner.manager.save()`.
+- **Additional Issue**: Missing DTO imports/exports, duplicate controller methods, and missing service method implementations.
+- **Fixes**:
+  - Removed imports for non-existent DTOs and added missing response DTOs.
+  - Eliminated duplicate controller methods.
+  - Added stub implementations for missing service methods to resolve compilation errors.
+
 ## Additional Fixes for Loyalty Module
 - **Issue**: Syntax errors in `loyalty.service.ts` due to corrupted code structure (extra commas, misplaced brackets, undefined variables).
 - **Fixes**:
@@ -73,6 +85,11 @@ These errors stemmed from:
 - **Loose Typing**: Overuse of `any` types leads to TypeScript inference issues, especially with array methods like `map` and `Object.values`.
 - **Incorrect Decorator Usage**: Passing invalid arguments to validation decorators without checking documentation.
 - **Type Mismatches**: Entity properties not matching nullable database columns, causing assignment errors.
+- **Property Naming Conventions**: Confusion between database column names (snake_case) and TypeScript property names (camelCase) in TypeORM.
+- **Relation Handling**: Attempting to assign null to non-nullable relations without conditional checks.
+- **Type Inference Issues**: TypeScript's strict inference leading to incorrect type assumptions for repository save operations.
+- **Incomplete Implementation**: Controller and service files with missing methods, duplicate code, and incorrect imports due to rushed development or copy-paste errors.
+- **Inconsistent Module Structure**: DTOs and services not fully aligned, leading to import/export mismatches.
 
 ## How to Avoid Such Mistakes in Future API Development
 To prevent similar issues:
@@ -88,6 +105,12 @@ To prevent similar issues:
 - **Strong Typing**: Define interfaces for data structures instead of using `any`; use generics and type assertions judiciously to maintain type safety.
 - **Validate Decorator Usage**: Always check library documentation for correct decorator arguments; use examples from official sources.
 - **Align Entity Types with Database Schema**: Ensure TypeORM entity properties match column definitions, including nullability, to prevent type mismatches.
+- **Follow Naming Conventions**: Use consistent naming for database columns (snake_case) and TypeScript properties (camelCase); always use property names in code.
+- **Handle Relations Carefully**: Use conditional assignments or optional chaining for nullable relations to avoid null assignment errors.
+- **Use Explicit Type Annotations**: Add type hints for variables where TypeScript inference might fail, especially with ORM operations.
+- **Complete Implementation Before Commit**: Ensure all controller methods have corresponding service implementations and all DTOs are properly exported/imported.
+- **Avoid Code Duplication**: Use refactoring tools to detect and eliminate duplicate methods or imports.
+- **Consistent Module Development**: Develop controllers, services, and DTOs together, using scaffolding tools or templates to maintain consistency.
 
 ## Next Steps: Running the API
 
