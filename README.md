@@ -1,98 +1,327 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS API Framework ⚡
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A high-performance, production-ready NestJS API framework designed for rapid development of scalable APIs. Built with TypeScript, TypeORM, and best practices.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **⚡ Fast Startup**: Optimized for minimal boot time
+- **🏗️ Modular Architecture**: Clean separation of concerns
+- **🔐 Security First**: JWT authentication, role-based access, input validation
+- **📊 Database Ready**: TypeORM with MySQL/PostgreSQL support
+- **📝 Auto Documentation**: Swagger/OpenAPI integration
+- **🧪 Testing Ready**: Built-in unit and E2E test setup
+- **🔄 Hot Reload**: Development with instant feedback
+- **📈 Performance**: Connection pooling, caching, lazy loading
+- **🛡️ Type Safe**: Full TypeScript support
+- **📦 Production Ready**: Logging, monitoring, graceful shutdown
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📁 Structure
 
-## Project setup
-
-```bash
-$ npm install
+```
+nestjs-api-framework/
+├── src/
+│   ├── app.module.ts              # Main application module
+│   ├── main.ts                    # Application bootstrap
+│   ├── common/                    # Shared utilities
+│   │   ├── decorators/           # Custom decorators
+│   │   ├── filters/              # Exception filters
+│   │   ├── guards/               # Authentication guards
+│   │   ├── interceptors/         # Response interceptors
+│   │   ├── pipes/                # Validation pipes
+│   │   └── interfaces/           # TypeScript interfaces
+│   ├── config/                   # Configuration files
+│   │   ├── database.config.ts    # Database configuration
+│   │   ├── jwt.config.ts         # JWT configuration
+│   │   └── swagger.config.ts     # API documentation
+│   ├── core/                     # Core framework modules
+│   │   ├── auth/                 # Authentication system
+│   │   ├── database/             # Database utilities
+│   │   └── base/                 # Base classes and utilities
+│   └── modules/                  # Feature modules (your code)
+├── test/                         # Test files
+├── docs/                         # Documentation
+├── scripts/                      # Utility scripts
+├── .env.example                  # Environment template
+└── package.json                  # Dependencies
 ```
 
-## Compile and run the project
+## 🚀 Quick Start
+
+### 1. Installation
 
 ```bash
-# development
-$ npm run start
+# Clone or copy this framework
+git clone <repository-url> your-api-name
+cd your-api-name
 
-# watch mode
-$ npm run start:dev
+# Install dependencies
+npm install
 
-# production mode
-$ npm run start:prod
+# Copy environment file
+cp .env.example .env
 ```
 
-## Run tests
+### 2. Configuration
+
+Edit `.env` with your settings:
+
+```env
+# Application
+PORT=3000
+NODE_ENV=development
+
+# Database
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=password
+DB_DATABASE=myapp
+
+# JWT
+JWT_SECRET=your-super-secret-key
+JWT_EXPIRES_IN=24h
+
+# Redis (Optional)
+REDIS_HOST=localhost
+REDIS_PORT=6379
+```
+
+### 3. Start Development
 
 ```bash
-# unit tests
-$ npm run test
+# Start development server with hot reload
+npm run start:dev
 
-# e2e tests
-$ npm run test:e2e
+# Start in debug mode
+npm run start:debug
 
-# test coverage
-$ npm run test:cov
+# Build for production
+npm run build
+
+# Start production server
+npm run start:prod
 ```
 
-## Deployment
+### 4. Access API
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- **API**: http://localhost:3000
+- **Documentation**: http://localhost:3000/docs
+- **Health Check**: http://localhost:3000/health
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 📚 Core Concepts
+
+### 1. Creating a Module
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Generate a new module
+npx nest generate module modules/users
+npx nest generate controller modules/users
+npx nest generate service modules/users
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Entity Example
 
-## Resources
+```typescript
+// src/modules/users/entities/user.entity.ts
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-Check out a few resources that may come in handy when working with NestJS:
+@Entity('users')
+export class User {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+  @Column()
+  name: string;
 
-## Support
+  @Column({ unique: true })
+  email: string;
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 3. Service Example
 
-## Stay in touch
+```typescript
+// src/modules/users/users.service.ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+@Injectable()
+export class UsersService {
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
+  ) {}
 
-## License
+  async findAll() {
+    return this.userRepository.find();
+  }
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+  async create(userData: Partial<User>) {
+    const user = this.userRepository.create(userData);
+    return this.userRepository.save(user);
+  }
+}
+```
+
+### 4. Controller Example
+
+```typescript
+// src/modules/users/users.controller.ts
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { User } from './entities/user.entity';
+
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  findAll(): Promise<User[]> {
+    return this.usersService.findAll();
+  }
+
+  @Post()
+  create(@Body() userData: Partial<User>): Promise<User> {
+    return this.usersService.create(userData);
+  }
+}
+```
+
+## 🔐 Authentication
+
+### JWT Authentication
+
+```typescript
+// Protect routes with JWT
+@Controller('users')
+@UseGuards(JwtAuthGuard)
+export class UsersController {
+  // Only authenticated users can access
+}
+```
+
+### Role-Based Access
+
+```typescript
+// Require specific roles
+@Post()
+@Roles('admin')
+@UseGuards(RolesGuard)
+async createAdminResource() {
+  // Only admins can access
+}
+```
+
+## 📊 Database
+
+### Migrations
+
+```bash
+# Create migration
+npm run typeorm migration:generate -- -n MigrationName
+
+# Run migrations
+npm run typeorm migration:run
+
+# Revert migration
+npm run typeorm migration:revert
+```
+
+## 📝 Documentation
+
+### Swagger/OpenAPI
+
+The framework automatically generates API documentation. Access at `/docs`.
+
+## 🧪 Testing
+
+### Unit Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:cov
+```
+
+### E2E Tests
+
+```bash
+# Run E2E tests
+npm run test:e2e
+```
+
+## 🚀 Performance
+
+### Features
+
+- **Connection Pooling**: Efficient database connections
+- **Caching**: Redis support for frequently accessed data
+- **Lazy Loading**: Load relations only when needed
+- **Compression**: Gzip compression for responses
+
+## 🔧 Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| PORT | Server port | 3000 |
+| NODE_ENV | Environment | development |
+| DB_HOST | Database host | localhost |
+| DB_PORT | Database port | 3306 |
+| DB_USERNAME | Database user | root |
+| DB_PASSWORD | Database password | - |
+| DB_DATABASE | Database name | - |
+| JWT_SECRET | JWT secret | - |
+| JWT_EXPIRES_IN | JWT expiration | 24h |
+| REDIS_HOST | Redis host | localhost |
+| REDIS_PORT | Redis port | 6379 |
+
+## 🛠️ Scripts
+
+```json
+{
+  "start": "nest start",
+  "start:dev": "nest start --watch",
+  "start:debug": "nest start --debug --watch",
+  "start:prod": "node dist/main",
+  "build": "nest build",
+  "test": "jest",
+  "test:watch": "jest --watch",
+  "test:cov": "jest --coverage",
+  "test:e2e": "jest --config ./test/jest-e2e.json",
+  "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+  "format": "prettier --write \"src/**/*.ts\""
+}
+```
+
+## 📦 Dependencies
+
+### Core Dependencies
+
+- `@nestjs/core` - NestJS framework
+- `@nestjs/common` - Common utilities
+- `@nestjs/config` - Configuration management
+- `@nestjs/typeorm` - TypeORM integration
+- `@nestjs/jwt` - JWT authentication
+- `@nestjs/swagger` - API documentation
+- `typeorm` - ORM for database
+- `class-validator` - Input validation
+- `class-transformer` - Data transformation
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
+
+## 📄 License
+
+This framework is MIT licensed.

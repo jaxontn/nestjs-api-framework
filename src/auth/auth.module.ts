@@ -10,6 +10,7 @@ import { Merchant } from '../entities/merchant.entity';
 import { GameSession } from '../entities/game-session.entity';
 import { Leaderboard } from '../entities/leaderboard.entity';
 import { LoyaltyTransaction } from '../entities/loyalty-transaction.entity';
+import { AuthService } from '../modules/customers/auth.service';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { LoyaltyTransaction } from '../entities/loyalty-transaction.entity';
     TypeOrmModule.forFeature([Customer, Merchant, GameSession, Leaderboard, LoyaltyTransaction]),
   ],
   controllers: [AuthController],
-  providers: [JwtStrategy],
-  exports: [],
+  providers: [JwtStrategy, AuthService],
+  exports: [AuthService],
 })
 export class AuthModule {}

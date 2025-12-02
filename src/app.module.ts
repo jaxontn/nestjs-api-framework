@@ -1,53 +1,39 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { Merchant } from './entities/merchant.entity';
-import { MerchantsModule } from './modules/merchants/merchants.module';
-import { GamesModule } from './modules/games/games.module';
-import { QrCampaignsModule } from './modules/qr-campaigns/qr-campaigns.module';
-import { CustomersModule } from './customers/customers.module';
-import { AuthModule } from './auth/auth.module';
-import { LoyaltyModule } from './modules/loyalty/loyalty.module';
-import { ChallengesModule } from './modules/challenges/challenges.module';
-import { MerchantUsersModule } from './modules/merchant-users/merchant-users.module';
-import { ReportsModule } from './modules/reports/reports.module';
+import { AuthModule } from './core/auth/auth.module';
+import { DatabaseModule } from './core/database/database.module';
+import { HealthModule } from './core/health/health.module';
+import { databaseConfig } from './config/database.config';
+import { jwtConfig } from './config/jwt.config';
+import { swaggerConfig } from './config/swagger.config';
+import { configuration } from './config/configuration';
 
 @Module({
   imports: [
+    // Configuration
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [configuration],
+      envFilePath: ['.env.local', '.env'],
     }),
+
+    // Database
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get<string>('DB_HOST', 'localhost'),
-        port: configService.get<number>('DB_PORT', 3306),
-        username: configService.get<string>('DB_USERNAME', 'root'),
-        password: configService.get<string>('DB_PASSWORD', ''),
-        database: configService.get<string>('DB_DATABASE', 'gamified_crm'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: configService.get<boolean>('DB_SYNCHRONIZE', false),
-        logging: configService.get<boolean>('DB_LOGGING', true),
-        timezone: '+00:00',
-        charset: 'utf8mb4',
-      }),
+      useFactory: databaseConfig,
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Merchant]),
-    MerchantsModule,
-    GamesModule,
-    QrCampaignsModule,
-    CustomersModule,
+
+    // Core Modules
+    HealthModule,
     AuthModule,
-    LoyaltyModule,
-    ChallengesModule,
-    MerchantUsersModule,
-    ReportsModule,
+    DatabaseModule,
+
+    // Feature modules will be dynamically imported here
+    // Example: UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

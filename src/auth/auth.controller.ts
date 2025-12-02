@@ -28,8 +28,6 @@ import {
 
 @ApiTags('Auth')
 @Controller('auth')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
@@ -53,8 +51,21 @@ export class AuthController {
     };
   }
 
+  // Merchant Login
+  @Post('merchants/login')
+  @ApiOperation({ summary: 'Merchant login' })
+  @ApiResponse({ status: 200, description: 'Login successful' })
+  @ApiResponse({ status: 401, description: 'Invalid credentials' })
+  async merchantLogin(@Body() loginDto: { email: string; password: string }) {
+    const result = await this.authService.merchantLogin(loginDto.email, loginDto.password);
+
+    return result; // Return the result directly from the service
+  }
+
   // Get Customer by Phone/Email (direct access)
   @Get('customers/lookup/:phoneOrEmail')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get customer by phone/email' })
   @ApiParam({ name: 'phoneOrEmail', description: 'Phone number or email address' })
   @ApiQuery({ name: 'merchant_id', required: true, description: 'Merchant ID' })
